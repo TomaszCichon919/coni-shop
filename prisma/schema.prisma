@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Product {
+  id        String  @id @default(uuid())
+  name    String @unique
+  price       Int
+  description String
+
+  // Relationships
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id        String  @id @default(uuid())
+  address       String
+  phone         String
+  totalPrice    Int
+  details      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relationships
+  orderItems    OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+// orders: [
+//   {
+//     "adress": "hhhh",
+// "phone": "60249688",
+// "totalPrice": 56,
+// "products": [
+// {
+// "id": "cake",
+// "amount": 2,
+// "price": 18,
+// "name": "Zio Stefano's Doughnut",
+// },
+// {
+// "id": "breakfast",
+// "amount": 2,
+// "price": 18,
+// "name": "Zia Giulia's Breakfast",
+// }
+// ],
+// "id": 1
+// },
+// ]
