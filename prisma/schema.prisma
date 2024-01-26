@@ -13,8 +13,8 @@ datasource db {
 
 model Product {
   id        String  @id @default(uuid())
-  name    String @unique
-  price       Int
+  name      String @unique
+  price     Int
   description String
 
   // Relationships
@@ -22,7 +22,7 @@ model Product {
 }
 
 model Order {
-  id        String  @id @default(uuid())
+  id            String  @id @default(uuid())
   address       String
   phone         String
   totalPrice    Int

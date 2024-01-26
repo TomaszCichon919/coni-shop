@@ -20,10 +20,10 @@ export class OrdersService {
       data: {
         ...orderData,
         orderItems: {
-          create: orderItems.map(item => ({
+          create: orderItems.map((item) => ({
             quantity: item.quantity,
             price: item.price,
-            productId: item.id, // Ensure productId is specified
+            productId: item.id,
           })),
         },
       },
