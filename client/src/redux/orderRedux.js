@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { API_URL } from '../config';
 
 /* SELECTORS */
@@ -20,32 +20,43 @@ export const loadOrders = (orders) => ({
   payload: orders,
 });
 
-export const addOrder = (order) => ({
-  type: ADD_ORDER,
-  payload: {
-    id: uuidv4(), // Generate unique ID for the order
-    order,
-  },
-});
+// export const addOrder = (order) => ({
+//   type: ADD_ORDER,
+//   payload: {
+//     id: uuidv4(), // Generate unique ID for the order
+//     order,
+//   },
+// });
 
 /* THUNKS */
-export const loadOrdersRequest = () => {
-  return async (dispatch) => {
-    try {
-      const response = await fetch(`${API_URL}/api/orders`);
+export const addOrder = (order) => {
+    return async (dispatch) => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/orders`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(order),
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          dispatch({
+            type: ADD_ORDER,
+            payload: {
+              order: data, 
+            },
+          });
+        } else {
+          throw new Error('Failed to add order');
+        }
+      } catch (error) {
+        console.error('Error adding order:', error);
 
-      if (response.ok) {
-        const data = await response.json();
-        dispatch(loadOrders(data));
-      } else {
-        throw new Error('Failed to fetch orders');
       }
-    } catch (error) {
-      console.error('Error fetching orders:', error);
-    }
+    };
   };
-};
-
 
 export default function reducer(statePart = [], action = {}) {
   switch (action.type) {

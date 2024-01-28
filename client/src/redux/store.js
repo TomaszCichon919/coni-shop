@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-// import thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 import initialState from './InitailState';
 
 // import reducers
@@ -20,7 +20,7 @@ const store = createStore(
   reducer,
   initialState,
   compose(
-		// applyMiddleware(thunk),
+		applyMiddleware(thunk),
 		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	)
 );
