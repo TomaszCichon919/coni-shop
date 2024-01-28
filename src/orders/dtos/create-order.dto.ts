@@ -12,6 +12,9 @@ class OrderItemDto {
   @IsInt()
   price: number;
 
+  @IsString()
+  comments: string;
+
   // Other properties if needed
 }
 
@@ -25,10 +28,18 @@ export class CreateOrderDto {
   phone: string;
 
   @IsInt()
-  totalPrice: number;
+  totalCost: number;
 
   @IsString()
-  details: string;
+  @IsNotEmpty()
+  name: string;
+
+  @IsString()
+  @IsNotEmpty()
+  surname: string;
+
+  @IsString()
+  deliveryDetails: string;
 
   @ArrayMinSize(1)
   @ValidateNested({ each: true })

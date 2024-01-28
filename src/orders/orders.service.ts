@@ -23,6 +23,7 @@ export class OrdersService {
           create: orderItems.map((item) => ({
             quantity: item.quantity,
             price: item.price,
+            comments: item.comments,
             productId: item.id,
           })),
         },

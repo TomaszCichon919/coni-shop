@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Container, Col, Row, Button, Form } from 'react-bootstrap';
+import { Container, Col, Row, Button, Form, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../../redux/cartRedux';
 import { getAllProducts } from '../../../redux/productRedux';
@@ -11,6 +11,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const product = products.find(product => product.id === id);
   const [quantity, setQuantity] = useState(1);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleAddToCart = () => {
     const totalPrice = quantity * product.price;
@@ -22,6 +23,7 @@ const ProductDetails = () => {
       img: product.img
     };
     dispatch(addToCart(cartItem));
+    setShowAlert(true);
     console.log(cartItem)
   };
 
@@ -31,9 +33,24 @@ const ProductDetails = () => {
     }
   };
 
+  useEffect(() => {
+    let timer;
+    if (showAlert) {
+      timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 3000); // Hide alert after 3 seconds
+    }
+    return () => clearTimeout(timer);
+  }, [showAlert]);
+
   return (
     <Container>
       <h2>Product details</h2>
+      {showAlert && ( // Render the alert if showAlert is true
+        <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
+          Product added to cart!
+        </Alert>
+      )}
       <Col key={product.id} className='wrapper'>
         <h3 className='pt-2 px-2'>{product.name}</h3>
         <Row>

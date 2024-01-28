@@ -5,8 +5,9 @@ import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { Form } from 'react-bootstrap';
-import { loadOrders } from '../../../redux/orderRedux';
+import { Form, Alert } from 'react-bootstrap';
+import { addOrder } from '../../../redux/orderRedux';
+import { removeAllCartProducts } from '../../../redux/cartRedux';
 
 const OrderSummary = () => {
     const [name, setName] = useState('');
@@ -14,6 +15,7 @@ const OrderSummary = () => {
     const [address, setAddress] = useState('');
     const [content, setContent] = useState('');
     const [phone, setPhone] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
 
     const dispatch = useDispatch();
     // Retrieve cart products from Redux store
@@ -37,14 +39,22 @@ const OrderSummary = () => {
           const order = {
             address,
             phone,
-            totalPrice: totalCost,
+            totalCost,
             name,
-            details: surname,
-            content,
+            surname,
+            deliveryDetails: content,
             orderItems,
           };
         console.log('order', order);
-          dispatch(loadOrders(order));
+          dispatch(addOrder(order));
+
+          dispatch(removeAllCartProducts());
+
+          // Show alert for 3 seconds
+          setShowAlert(true);
+          setTimeout(() => {
+              setShowAlert(false);
+          }, 3000);
         };
   
 
@@ -96,6 +106,11 @@ const OrderSummary = () => {
                 </Button>
 
             </Form>
+            {showAlert && (
+                <Alert variant="success" className="mt-3">
+                    Order confirmed successfully!
+                </Alert>
+            )}
             </div>
     );
   

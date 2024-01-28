@@ -11,14 +11,19 @@ const ADD_TO_CART = createActionName('ADD_TO_CART');
 const REMOVE_FROM_CART = createActionName('REMOVE_FROM_CART');
 const REMOVE_ALL_PRODUCTS = createActionName('REMOVE_ALL_PRODUCTS');
 const UPDATE_CART_PRODUCT_QUANTITY = createActionName('UPDATE_CART_PRODUCT_QUANTITY');
+const UPDATE_CART_PRODUCT_COMMENT = createActionName('UPDATE_CART_PRODUCT_COMMENT');
 
 /* action creators */
 export const addToCart = payload => ({ payload, type: ADD_TO_CART });
 export const removeFromCart = payload => ({ payload, type: REMOVE_FROM_CART });
 export const removeAllCartProducts = payload => ({ payload, type: REMOVE_ALL_PRODUCTS });
-export const updateCartProductQuantity = (productId, newQuantity, totalPrice, comments) => ({
-  payload: { productId, newQuantity, totalPrice, comments },
+export const updateCartProductQuantity = (productId, newQuantity, totalPrice) => ({
+  payload: { productId, newQuantity, totalPrice },
   type: UPDATE_CART_PRODUCT_QUANTITY,
+});
+export const updateCartProductComment = (productId, comment) => ({
+  type: UPDATE_CART_PRODUCT_COMMENT,
+  payload: { productId, comment },
 });
 
 /* reducer */
@@ -43,7 +48,7 @@ export default function reducer(statePart = [], action = {}) {
       };
     }
     case UPDATE_CART_PRODUCT_QUANTITY: {
-      const { productId, newQuantity, totalPrice, comments } = action.payload;
+      const { productId, newQuantity, totalPrice} = action.payload;
       return {
         ...statePart,
         products: statePart.products.map(product => {
@@ -52,7 +57,21 @@ export default function reducer(statePart = [], action = {}) {
               ...product,
               quantity: newQuantity,
               totalPrice: totalPrice,
-              comments: comments, 
+            };
+          }
+          return product;
+        }),
+      };
+    }
+    case UPDATE_CART_PRODUCT_COMMENT: {
+      const { productId, comment } = action.payload;
+      return {
+        ...statePart,
+        products: statePart.products.map(product => {
+          if (product.id === productId) {
+            return {
+              ...product,
+              comments: comment,
             };
           }
           return product;

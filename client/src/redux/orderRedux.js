@@ -49,18 +49,10 @@ export const loadOrdersRequest = () => {
 
 export default function reducer(statePart = [], action = {}) {
   switch (action.type) {
-    case LOAD_ORDERS:
-      return {
-        ...statePart,
-        orders: action.payload,
-      };
     case ADD_ORDER:
-      return {
-        ...statePart,
-        orders: [...statePart.orders, { id: action.payload.id, ...action.payload.order }],
-      };
+      return [
+    ...statePart, {id: action.payload.id, ...action.payload.order}];
     default:
       return statePart;
   }
 };
-

@@ -31,15 +31,19 @@ function getOrders() {
       id: 'fd105551-0f0d-4a9f-bc41-c559c8a17260',
       address: 'The Grapes of Wrath',
       phone: '43342423',
-      totalPrice: 10,
-      details: 'please deliver after 5',
+      totalCost: 10,
+      name: "john",
+      surname: "Doe",
+      deliveryDetails: 'please deliver after 5',
     },
     {
       id: 'fd105551-0f0d-4a9f-bc41-c559c8a17261',
       address: 'The Grapes of Wrat2',
       phone: '43342423',
-      totalPrice: 10,
-      details: 'please deliver after 5',
+      totalCost: 10,
+      name: "john",
+      surname: "Doe",
+      deliveryDetails: 'please deliver after 5',
     },
   ];
 }
@@ -52,6 +56,7 @@ function getOrderItems() {
       productId: 'fd105551-0f0d-4a9f-bc41-c559c8a17256',
       quantity: 10,
       price: 14,
+      comments: 'deliver fast'
     },
     {
       id: 'fd105551-0f0d-4a9f-bc41-c559c8a17261',
@@ -59,6 +64,7 @@ function getOrderItems() {
       productId: 'c920c7b9-a67d-4edb-8ce7-e3c9f3889e56',
       quantity: 10,
       price: 12,
+      comments: 'deliver low'
     },
   ];
 }
