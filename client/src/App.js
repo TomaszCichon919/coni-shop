@@ -1,11 +1,8 @@
 import React from 'react';
 import { Routes, Route, } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 
-// import './styles/bootstrap.scss';
-// import './styles/global.scss';
 
-// import MainLayout from './components/layout/MainLayout/MainLayout';
+import Container from './components/layout/Container/Container';
 import Homepage from './components/views/Homepage/Hompage';
 import ProductDetails from './components/views/ProductDetails/ProductDetails';
 import Cart from './components/views/Cart/Cart';

@@ -1,38 +1,37 @@
-import { Row, Col } from 'react-bootstrap';
 import React from 'react';
-import './ProductSummary.scss';
-import Button from 'react-bootstrap/Button';
+import { Col, Row, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-// import { IMGS_URL } from '../../../config'
+import './ProductSummary.scss';
+import clsx from 'clsx';
 
-const ProductSummary = ({ name, img, price, id}) =>
-{
+const ProductSummary = ({ name, img, price, id }) => {
+  const isLargeProduct = name.includes('jar');
+  const isSmallProduct = name.includes('Wild');
 
   return (
     <Col key={id} className='wrapper'>
-    <h3 className='p-2'>{name}</h3>
-    <Row>
-      <Col xs={8} className='p-4'>
-        <div className='img-container'>
-          <img className='ad_img' src={img} alt={id} />
-        </div>
-      </Col>
-      <Col xs={4}>
-        <p>
-          <span className='caption'>price</span>
-          {price}
-        </p>
-        <div className='buttons-container'>
-          <Link to={'/product/' + id}>
-            <Button className='mt-5' variant='dark' block>
-              Read More
-            </Button>
-           </Link>
-        </div>
-      </Col>
-    </Row>
-  </Col>
-);
+      <Row className='img-row'>
+        <Col className='sm-12 p-0'>
+          <div className='img-container'>
+            <img className={clsx('product-img', { 'small-img': isSmallProduct, 'large-img': isLargeProduct })} src={img} alt={id} />
+          </div>
+          <div className='overlay'>
+            <Link to={'/product/' + id}>
+              <Button variant='dark'>Read More</Button>
+            </Link>
+          </div>
+        </Col>
+      </Row>
+      <Row className='details'>
+        <Col>
+          <div className='name-container pt-5'>
+            <h3 className='name'>{name}</h3>
+            <p className='price'>Price: {price}</p>
+          </div>
+        </Col>
+      </Row>
+    </Col>
+  );
 };
 
 export default ProductSummary;

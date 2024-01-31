@@ -1,5 +1,5 @@
 // import { v4 as uuidv4 } from 'uuid';
-import { API_URL } from '../config';
+// import { API_URL } from '../config';
 
 /* SELECTORS */
 export const getAllOrders = ({ orders }) => orders;
@@ -67,3 +67,4 @@ export default function reducer(statePart = [], action = {}) {
       return statePart;
   }
 };
+

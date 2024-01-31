@@ -1,117 +1,132 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap'; // Import Button and Form from react-bootstrap
-import { getAll, updateCartProductQuantity, updateCartProductComment } from '../../../redux/cartRedux';
+import { Button, Form, Container, Row, Col } from 'react-bootstrap';
+import { memoizedGetAll, updateCartProductQuantity, removeAllCartProducts, updateCartProductComment } from '../../../redux/cartRedux';
+import './Cart.scss';
+
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartProducts = useSelector(getAll);
+  const cartProducts = useSelector(memoizedGetAll);
   const [comments, setComments] = useState({});
   const [comment, setComment] = useState('');
 
   const handleQuantityChange = (productId, newQuantity, productPrice) => {
-    // Ensure newQuantity is a number
     newQuantity = parseInt(newQuantity);
-
-    // Ensure productPrice is a number
     productPrice = parseFloat(productPrice);
 
-    // Check if newQuantity is a valid number
     if (!isNaN(newQuantity) && newQuantity >= 0) {
-      // Find the cartItem with the corresponding productId
       const cartItem = cartProducts.find(item => item.id === productId);
 
-      // If cartItem exists and has a valid quantity
       if (cartItem && !isNaN(cartItem.quantity)) {
-        // Calculate price per item
         const pricePerItem = productPrice / cartItem.quantity;
-
-        // Calculate new total price
         const totalPrice = newQuantity * pricePerItem;
-        console.log('new price', totalPrice);
-
-        // Dispatch action to update cart product quantity and total price
         dispatch(updateCartProductQuantity(productId, newQuantity, totalPrice));
       }
     }
   };
 
   const handleAddComment = (productId) => {
-    // Update the comments state with the new comment for the specified product ID
     setComments({
       ...comments,
-      [productId]: comment // Store the comment with the product ID as the key
+      [productId]: comment
     });
-    console.log('check', comments);
-    const productComment = comments[productId];
-    console.log('check2', productComment);
-    dispatch(updateCartProductComment(productId, productComment));
-    // Clear the comment field
+    dispatch(updateCartProductComment(productId, comments[productId]));
     setComment('');
   };
 
+  const handleClearCart = () => {
+    dispatch(removeAllCartProducts());
+  };
   
 
   return (
-    <div>
-    <h2>Shopping Cart</h2>
-    {cartProducts.length === 0 ? (
-      <p>Your cart is empty.</p>
-    ) : (
-      <div>
-        {cartProducts.map((cartItem) => (
-          <div key={cartItem.id} className="mb-3">
-            <img src={cartItem.img} alt={cartItem.name} />
-            <p>{cartItem.name}</p>
-            <p>Price: ${cartItem.totalPrice}</p>
-            <input
-              type="number"
-              value={cartItem.quantity}
-              onChange={(e) => handleQuantityChange(cartItem.id, parseInt(e.target.value), cartItem.totalPrice)}
-              min="1"
-              className="form-control mb-2"
-            />
-            <Form.Group controlId={`comment-${cartItem.id}`} className="mb-2">
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Add Comment"
-                value={comments[cartItem.id] || ''} // Retrieve comment for the current cart item
-                onChange={(e) => setComments({
-                  ...comments,
-                  [cartItem.id]: e.target.value // Update comment for the current cart item
-                })}
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              onClick={() => handleAddComment(cartItem.id)}
-            >
-              Add comment
-            </Button>
-          </div>
-        ))}
-      </div>
-    )}
-    <Link to="/">
+    <Container>
+      <h2>Shopping Cart</h2>
+      {cartProducts.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <div>
+          {cartProducts.map((cartItem) => (
+            <Row key={cartItem.id}>
+              <Col xs={12} sm={6} className='cart_img_wrapper'>
+                <img className='cart_product_img' src={cartItem.img} alt={cartItem.name} />
+              </Col>
+              <Col xs={12} sm={6}>
+                <div>
+                  <p>{cartItem.name}</p>
+                  <p>Price: ${cartItem.totalPrice}</p>
+                  <div className="quantity-controls d-flex align-items-center">
+                    <Button
+                      variant="outline-secondary"
+                      onClick={() => handleQuantityChange(cartItem.id, cartItem.quantity - 1, cartItem.totalPrice)}
+                    >
+                      -
+                    </Button>
+                    <Form.Control
+                      type="number"
+                      value={cartItem.quantity}
+                      onChange={(e) => handleQuantityChange(cartItem.id, e.target.value, cartItem.totalPrice)}
+                      min="1"
+                      className="form-control mb-2 mx-2"
+                    />
+                    <Button
+                      variant="outline-secondary"
+                      onClick={() => handleQuantityChange(cartItem.id, cartItem.quantity + 1, cartItem.totalPrice)}
+                      className="mb-2 mx-2"
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+                <Form.Group controlId={`comment-${cartItem.id}`} className="mb-2">
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    placeholder="Add Comment"
+                    value={comments[cartItem.id] || ''}
+                    onChange={(e) => setComments({
+                      ...comments,
+                      [cartItem.id]: e.target.value
+                    })}
+                  />
+                </Form.Group>
+                <Button
+                  variant="primary"
+                  onClick={() => handleAddComment(cartItem.id)}
+                >
+                  Add comment
+                </Button>
+              </Col>
+            </Row>
+          ))}
+        </div>
+      )}
+      <Link to="/">
+        <Button
+          className='my-2 mx-3 px-5'
+          variant='primary'
+        >
+          Back to shopping
+        </Button>
+      </Link>
+      <Link to="/order">
+        <Button
+          className='my-2 mx-3 px-5'
+          variant='primary'
+        >
+          Order summary
+        </Button>
+      </Link>
       <Button
-        className='my-2 mx-3 px-5'
-        variant='primary'
-      >
-        Back to shopping
-      </Button>
-    </Link>
-    <Link to="/order">
-      <Button
-        className='my-2 mx-3 px-5'
-        variant='primary'
-      >
-        Order summary
-      </Button>
-    </Link>
-  </div>
+          className='my-2 mx-3 px-5'
+          variant='primary'
+          onClick={handleClearCart}
+        >
+          Clear Cart
+        </Button>
+    </Container>
   );
 };
-
 export default Cart;

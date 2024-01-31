@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import ProductList from '../ProductList/ProductList'
 
 const ProductSection = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const products = useSelector(getAllProducts);
 console.log('products', products)
   // useEffect(() => {

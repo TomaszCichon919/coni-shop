@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ProductSummary from '../ProductSummary/ProductSummary';
 import './ProductList.scss'; // Import custom styles for ProductList
+import { Row, Col } from 'react-bootstrap';
 
 const ProductList = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,20 +13,6 @@ const ProductList = ({ products }) => {
 
   const totalPages = Math.ceil(products.length / productsPerPage);
 
-  useEffect(() => {
-    const updateProductsPerPage = () => {
-      if (window.innerWidth >= 1024) {
-        setCurrentPage(1);
-      }
-    };
-
-    window.addEventListener('resize', updateProductsPerPage);
-
-    return () => {
-      window.removeEventListener('resize', updateProductsPerPage);
-    };
-  }, []);
-
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
   };
@@ -36,11 +23,13 @@ const ProductList = ({ products }) => {
 
   return (
     <>
-      <div className="product-list">
-        {currentProducts.map((product, index) => (
-          <ProductSummary key={product.id} {...product} />
+      <Row className="product-list">
+        {currentProducts.map((product) => (
+          <Col key={product.id} xs={12} sm={6} md={4} lg={3}>
+            <ProductSummary {...product} />
+          </Col>
         ))}
-      </div>
+      </Row>
       <div className="pagination">
         {currentPage > 1 && <button onClick={prevPage}>Previous</button>}
         {currentPage < totalPages && <button onClick={nextPage}>Next</button>}
