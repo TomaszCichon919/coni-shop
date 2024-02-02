@@ -16,10 +16,10 @@ export class ProductsService {
     });
   }
 
-  public async create(authorData: Omit<Product, 'id'>): Promise<Product> {
+  public async create(productData: Omit<Product, 'id'>): Promise<Product> {
     try {
       return await this.prismaService.product.create({
-        data: authorData,
+        data: productData,
       });
     } catch (error) {
       if (error.code === 'P2002')

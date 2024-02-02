@@ -14,7 +14,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 
 
 
-const LOAD_PRODUCTS = createActionName('LOAD_ADS');
+const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 
 
 

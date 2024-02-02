@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
+import { useParams, Link, Navigate} from 'react-router-dom';
 import { Container, Col, Row, Button, Form, Alert } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { addToCart } from '../../../redux/cartRedux';
 import { getAllProducts } from '../../../redux/productRedux';
 import { memoizedGetAll } from '../../../redux/cartRedux';
@@ -21,6 +21,7 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [showAlert, setShowAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+
 
   const handleAddToCart = () => {
     const isProductInCart = memoizedcartItems.find(item => item.id === product.id) !== undefined;
@@ -59,6 +60,9 @@ const ProductDetails = () => {
     return () => clearTimeout(timer);
   }, [showAlert, showErrorAlert]);
 
+
+  if(!product) return <Navigate to="/" />
+
   const isLargeProduct = product.name.includes('jar');
   const isSmallProduct = product.name.includes('Wild');
 
@@ -89,7 +93,6 @@ const ProductDetails = () => {
               <span className="caption">Price</span>
               {product.price}$
             </p>
-            <p>
               <span className="caption">Description</span>
               <ul className="description-list">
                 {descriptionSentences.map((sentence, index) => (
@@ -99,7 +102,6 @@ const ProductDetails = () => {
                   </li>
                 ))}
               </ul>
-            </p>
             <div className="quantity-controls">
               <Form.Group className="mb-3 d-flex align-items-center">
                 <Button variant="outline-secondary" onClick={() => handleQuantityChange(quantity - 1)}>-</Button>
@@ -143,6 +145,7 @@ const ProductDetails = () => {
       <Gallery productName={product.name}/>
     </Container>
   );
+
 };
 
 export default ProductDetails;
