@@ -1,13 +1,20 @@
+@import "../../../styles/settings.scss";
+
 .product-list {
     margin: -10px; /* Adjust spacing between products */
   }
   
   .pagination {
     margin-top: 20px; /* Adjust spacing between products and pagination */
+    justify-content: center;
   }
   
   /* Adjust styles for pagination buttons as needed */
   .pagination button {
     margin-right: 10px;
     padding: 5px 10px;
+  }
+
+  .page_button:hover {
+        background-color: $header-bg;
   }

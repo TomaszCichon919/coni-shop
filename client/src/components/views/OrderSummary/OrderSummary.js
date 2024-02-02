@@ -69,6 +69,7 @@ const OrderSummary = () => {
   return (
     <Container>
       <h2>Order Summary</h2>
+      <hr className="sectionDivider" />
       {cartProducts.map((product) => (
         <Row key={product.id} className="mb-3">
           <Col xs={12} sm={6} className="d-flex align-items-center">
@@ -81,6 +82,7 @@ const OrderSummary = () => {
               <p>Comments: {product.comments}</p>
             </div>
           </Col>
+          <hr className="sectionDivider" />
         </Row>
       ))}
 

@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../../redux/cartRedux';
 import { getAllProducts } from '../../../redux/productRedux';
 import { memoizedGetAll } from '../../../redux/cartRedux';
+import Gallery from '../../layout/Gallery/Gallery'
 import './ProductDetails.scss';
 import clsx from 'clsx';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaw} from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetails = () => {
   const memoizedcartItems = useSelector(memoizedGetAll);
@@ -58,9 +62,12 @@ const ProductDetails = () => {
   const isLargeProduct = product.name.includes('jar');
   const isSmallProduct = product.name.includes('Wild');
 
+  const descriptionSentences = product.description.split('. ');
+
   return (
     <Container>
       <h2>Product details</h2>
+      <hr className="sectionDivider" />
       {showAlert && (
         <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
           Product added to cart!
@@ -72,19 +79,26 @@ const ProductDetails = () => {
         </Alert>
       )}
       <Col key={product.id} className="details-wrapper">
-        <h3 className="pt-2 px-2">{product.name}</h3>
         <Row>
           <Col xs={12} sm={6} className="img_container_d">
             <img className={clsx('product_img_d', { 'small_img_d': isSmallProduct, 'large_img_d': isLargeProduct })} src={product.img} alt={product.id} />
           </Col>
           <Col xs={12} sm={6} className="description_container">
+          <h3 className="pt-2 px-2">{product.name}</h3>
             <p>
               <span className="caption">Price</span>
               {product.price}$
             </p>
             <p>
               <span className="caption">Description</span>
-              {product.description}$
+              <ul className="description-list">
+                {descriptionSentences.map((sentence, index) => (
+                  <li key={index}>
+                    <FontAwesomeIcon icon={faPaw} className="description-icon" />
+                    {sentence}
+                  </li>
+                ))}
+              </ul>
             </p>
             <div className="quantity-controls">
               <Form.Group className="mb-3 d-flex align-items-center">
@@ -102,7 +116,7 @@ const ProductDetails = () => {
             </div>
             <Button
               className="my-2 mx-3 px-5"
-              variant="warning"
+              variant="success"
               onClick={handleAddToCart}
             >
               Add to Cart
@@ -110,7 +124,7 @@ const ProductDetails = () => {
             <Link to="/cart">
               <Button
                 className="my-2 mx-3 px-5"
-                variant="primary"
+                variant="dark"
               >
                 Go to Cart
               </Button>
@@ -118,7 +132,7 @@ const ProductDetails = () => {
             <Link to="/">
               <Button
                 className="my-2 mx-3 px-5 te"
-                variant="primary"
+                variant="dark"
               >
                 Back to shopping
               </Button>
@@ -126,6 +140,7 @@ const ProductDetails = () => {
           </Col>
         </Row>
       </Col>
+      <Gallery productName={product.name}/>
     </Container>
   );
 };

@@ -1,18 +1,18 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-// import styles from './Homepage.module.scss';
 
 
 import ProductSection from '../../layout/ProductSection/ProductSection';
-// import MainBanner from '../../layout/MainBanner/MainBanner';
+import ClientCarousel from '../../layout/ClientCarousel/ClientCarousel';
+
 
 
 const Homepage = () => (
   <div>
-    {/* <MainBanner /> */}
+    <ClientCarousel />
     <ProductSection />
- 
+
   </div>
 );
 

@@ -12,7 +12,7 @@ const ProductSummary = ({ name, img, price, id }) => {
     <Col key={id} className='wrapper'>
       <Row className='img-row'>
         <Col className='sm-12 p-0'>
-          <div className='img-container'>
+          <div>
             <img className={clsx('product-img', { 'small-img': isSmallProduct, 'large-img': isLargeProduct })} src={img} alt={id} />
           </div>
           <div className='overlay'>

@@ -8,9 +8,9 @@ import { memoizedGetAll } from '../../../redux/cartRedux'
 
 const MainBanner = () => {
 
-  // const cart = useSelector(useMemo(() => getAll, []));
+
   const cart = useSelector(memoizedGetAll);
-  // const cart = JSON.parse(localStorage.getItem('cart') || '[]'); // Retrieve cart data from local storage
+ 
 console.log('cart', cart)
   return (
     <div>
@@ -19,7 +19,7 @@ console.log('cart', cart)
         <div className='row align-items-center'>
         <div className='col text-center'>
             <a href='/'>
-              <img src='/images/logo/logo.jpg' alt='coni-logo' />
+              <img className={styles.logo} src='/images/logo/logo.jpg' alt='coni-logo' />
             </a>
           </div>
           <div className={`col text-left ${styles.phoneNumber}`}>
