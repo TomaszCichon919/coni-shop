@@ -7,12 +7,12 @@ import { useDispatch } from 'react-redux';
 import ProductList from '../ProductList/ProductList'
 
 const ProductSection = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const products = useSelector(getAllProducts);
 console.log('products', products)
-  // useEffect(() => {
-  //   dispatch(loadProductsRequest());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadProductsRequest());
+  }, [dispatch]);
 
   if (products === undefined || !products.length) {
     return <Alert color="info">Loading...</Alert>;
