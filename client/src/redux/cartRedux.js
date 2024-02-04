@@ -8,7 +8,6 @@ export const memoizedGetAll = createSelector(
   cart => (cart ? JSON.parse(cart) : [])
 );
 
-
 /* action name creator */
 const reducerName = 'cart';
 const createActionName = name => `app/${reducerName}/${name}`;
@@ -29,7 +28,6 @@ export const addToCart = payload => {
     dispatch({ type: ADD_TO_CART, payload });
   };
 };
-
 export const removeFromCart = payload => {
   return dispatch => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -73,46 +71,35 @@ export const updateCartProductComment = (productId, comment) => {
 };
 
 /* reducer */
-export default function reducer(statePart = { products: [] }, action = {}) {
+export default function reducer(statePart = [], action = {}) {
   switch (action.type) {
     case ADD_TO_CART: {
-      return {
-        ...statePart,
-        products: [...statePart.products, action.payload],
-      };
+      return [...statePart, action.payload];
     }
     case REMOVE_FROM_CART: {
-      return {
-        ...statePart,
-        products: statePart.products.filter(product => product.id !== action.payload),
-      };
+      return statePart.filter(product => product.id !== action.payload);
     }
     case REMOVE_ALL_PRODUCTS: {
-      return { products: [] };
+      localStorage.removeItem('cart');
+      return [];
     }
     case UPDATE_CART_PRODUCT_QUANTITY: {
       const { productId, newQuantity, totalPrice } = action.payload;
-      return {
-        ...statePart,
-        products: statePart.products.map(product => {
-          if (product.id === productId) {
-            return { ...product, quantity: newQuantity, totalPrice };
-          }
-          return product;
-        }),
-      };
+      return statePart.map(product => {
+        if (product.id === productId) {
+          return { ...product, quantity: newQuantity, totalPrice };
+        }
+        return product;
+      });
     }
     case UPDATE_CART_PRODUCT_COMMENT: {
       const { productId, comment } = action.payload;
-      return {
-        ...statePart,
-        products: statePart.products.map(product => {
-          if (product.id === productId) {
-            return { ...product, comments: comment };
-          }
-          return product;
-        }),
-      };
+      return statePart.map(product => {
+        if (product.id === productId) {
+          return { ...product, comments: comment };
+        }
+        return product;
+      });
     }
     default:
       return statePart;

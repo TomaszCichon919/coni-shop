@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 import { memoizedGetAll, updateCartProductQuantity, removeAllCartProducts, updateCartProductComment } from '../../../redux/cartRedux';
 import './Cart.scss';
@@ -8,6 +8,7 @@ import './Cart.scss';
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartProducts = useSelector(memoizedGetAll);
   const [comments, setComments] = useState({});
   const [comment, setComment] = useState('');
@@ -38,6 +39,7 @@ const Cart = () => {
 
   const handleClearCart = () => {
     dispatch(removeAllCartProducts());
+    navigate('/');
   };
   
 

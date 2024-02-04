@@ -10,7 +10,7 @@ const ProductSection = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadProductsRequest());
-  }, []);
+  }, [dispatch]);
   const products = useSelector(getAllProducts);
   console.log('products', products)
   if (products === undefined || !products.length) {

@@ -8,6 +8,7 @@ import { Button } from 'react-bootstrap';
 import { Form, Alert } from 'react-bootstrap';
 import { addOrder } from '../../../redux/orderRedux';
 import { removeAllCartProducts } from '../../../redux/cartRedux';
+import { useForm } from "react-hook-form";
 import './OrderSummary.scss';
 
 const OrderSummary = () => {
@@ -19,16 +20,15 @@ const OrderSummary = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const dispatch = useDispatch();
-  // Retrieve cart products from Redux store
+  const navigate = useNavigate();
+  const { register, handleSubmit: validate, formState: { errors } } = useForm();
   const cartProducts = useSelector(memoizedGetAll);
 
 
   // Calculate total cost
   const totalCost = cartProducts.reduce((acc, product) => acc + parseFloat(product.totalPrice), 0);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
 
     const orderItems = cartProducts.map(product => ({
       id: product.id,
@@ -62,7 +62,9 @@ const OrderSummary = () => {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
+      navigate('/');
     }, 3000);
+
   };
 
 
@@ -88,29 +90,33 @@ const OrderSummary = () => {
 
       <p>Total Cost: ${totalCost}</p>
       <Row>
-        <Form className="col-12 col-sm-3 mx-auto" onSubmit={handleSubmit}>
+        <Form className="col-12 col-sm-3 mx-auto" onSubmit={validate(handleSubmit)}>
 
           <h1 className="my-4">Delivery information</h1>
 
 
           <Form.Group className="mb-3" controlId="formTitle">
             <Form.Label>Customer Name</Form.Label>
-            <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter name"></Form.Control>
+            <Form.Control {...register("name", { required: true })} type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter name"></Form.Control>
+            {errors.name && <small className="d-block form-text text-danger mt-2"></small>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formDate">
             <Form.Label>Surname</Form.Label>
-            <Form.Control type="text" value={surname} onChange={e => setSurname(e.target.value)} placeholder="surname"></Form.Control>
+            <Form.Control {...register("surname", { required: true })} type="text" value={surname} onChange={e => setSurname(e.target.value)} placeholder="surname"></Form.Control>
+            {errors.surname && <small className="d-block form-text text-danger mt-2"></small>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formAddress">
             <Form.Label>Adress</Form.Label>
-            <Form.Control type="text" value={address} onChange={e => setAddress(e.target.value)} placeholder=" Enter address"></Form.Control>
+            <Form.Control {...register("address", { required: true })} type="text" value={address} onChange={e => setAddress(e.target.value)} placeholder=" Enter address"></Form.Control>
+            {errors.address && <small className="d-block form-text text-danger mt-2"></small>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formAddress">
             <Form.Label>Phone</Form.Label>
-            <Form.Control type="number" value={phone} onChange={e => setPhone(e.target.value)} placeholder=" Enter phone"></Form.Control>
+            <Form.Control {...register("phone", { required: true })} type="number" value={phone} onChange={e => setPhone(e.target.value)} placeholder=" Enter phone"></Form.Control>
+            {errors.phone && <small className="d-block form-text text-danger mt-2"></small>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formContent">
