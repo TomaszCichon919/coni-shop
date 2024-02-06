@@ -16,3 +16,25 @@ $primary: #ffff;
 
 
 
+$color-light: #fff;
+$color-dark: #2f3542;
+
+
+$font-text: 'Poppins', sans-serif;
+
+$radius: 5px;
+$base-size: 12px;
+$transition: all 0.3s;
+
+// hover transition variables
+$transition: all 1s;
+
+
+%hover-transform {
+    background-position: 100% 0;
+    background-image: linear-gradient(90deg, #ffffff 50%, transparent 50%);
+    transition: $transition;
+    &:hover {
+        background-position: 0 100%;
+    }
+  }

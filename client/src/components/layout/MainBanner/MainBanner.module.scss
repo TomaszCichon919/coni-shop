@@ -3,32 +3,33 @@
 .root {
   background-color: $header-bg;
 
-  :global(.container) > :global(.row) {
-    height: 145px;
-  }
+    height: 130px;
+  
 
   .logo {
     border-radius: 10px;
+  
   }
   
   
   .phoneNumber {
-    p {
-      margin: 0;
+    span {
+      margin-left: 10px;
       font-size: 17px;
       line-height: 42px;
-      color: rgb(216, 216, 216);
+      color:  $primary;
       font-weight: 500;
-
+    }
+  }
       .icon {
         font-size: 32px;
         color: $primary;
         vertical-align: middle;
         margin-top: -3px;
-        margin-right: 0.8rem;
+        
       }
-    }
-  }
+    
+
 
   .cart {
     display: flex;
@@ -38,10 +39,10 @@
       display: inline-block;
       position: relative;
       color: #ffffff;
-      margin-right: 10px;
+      
 
       .cartIcon {
-        width: 50px;
+       
         height: 50px;
         display: flex;
         align-items: center;
@@ -49,7 +50,7 @@
         font-size: 20px;
 
         .icon {
-          margin-right: 100px;
+          margin-right: 10px
         }
       }
 
@@ -67,7 +68,7 @@
         color: rgb(224, 227, 237);
         position: absolute;
         top: 28%;
-        right: 60px;
+        right: -40px;
         transform: translate(50%, -50%);
       }
 
@@ -83,22 +84,4 @@
   }
 }
 
-/* MEDIA */
 
-@media screen and (max-width: 767px) {
-  .root {
-    a img {
-      order: 0
-    }
-
-    .phoneNumber {
-      order: 1;
-      margin-top: 30px;
-
-      p {
-        font-size: 14px;
-        text-align: center;
-      }
-    }
-  }
-}

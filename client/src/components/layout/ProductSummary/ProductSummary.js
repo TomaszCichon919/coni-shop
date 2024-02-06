@@ -1,7 +1,8 @@
 import React from 'react';
-import { Col, Row, Button } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './ProductSummary.scss';
+import Button from '../Button/Button'; 
 import clsx from 'clsx';
 
 const ProductSummary = ({ name, img, price, id }) => {
@@ -17,7 +18,7 @@ const ProductSummary = ({ name, img, price, id }) => {
           </div>
           <div className='overlay'>
             <Link to={'/product/' + id}>
-              <Button variant='dark'>Read More</Button>
+              <Button>Read More</Button>
             </Link>
           </div>
         </Col>

@@ -1,46 +1,40 @@
-import {React, useMemo} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMobileAlt, faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
-import styles from './MainBanner.module.scss'
-import { memoizedGetAll } from '../../../redux/cartRedux'
+import { Navbar, Nav, Container } from 'react-bootstrap'; // Import Bootstrap components
+import { memoizedGetAll } from '../../../redux/cartRedux';
+import styles from './MainBanner.module.scss';
 
 const MainBanner = () => {
-
-
   const cart = useSelector(memoizedGetAll);
- 
-console.log('cart', cart)
+
   return (
-    <div>
-    <div className={styles.root}>
-      <div className='container'>
-        <div className='row align-items-center'>
-        <div className='col text-center'>
-            <a href='/'>
-              <img className={styles.logo} src='/images/logo/logo.jpg' alt='coni-logo' />
-            </a>
-          </div>
-          <div className={`col text-left ${styles.phoneNumber}`}>
-            <p>
-              <FontAwesomeIcon className={styles.icon} icon={faMobileAlt} /> +48 666 200 700
-            </p>
-          </div>
-          <div className={`col text-right ${styles.cart}`}>
-            <Link to='/cart' className={styles.cartBox}>
+    <Navbar expand="md" className={styles.root}>
+      <Container>
+        <Navbar.Brand href="/">
+          <img className={styles.logo} src="/images/logo/logo.jpg" alt="coni-logo" />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse className="justify-content-between" id="basic-navbar-nav">
+          <Nav className={styles.phoneNumber}>
+            <Nav.Link>
+              <FontAwesomeIcon className={styles.icon} icon={faMobileAlt} /> 
+              </Nav.Link>
+              <span>+48 666 200 700</span>
+          </Nav>
+          <Nav className={styles.cart}>
+            <Nav.Link as={Link} to="/cart" className={styles.cartBox}>
               <div className={styles.cartIcon}>
                 <FontAwesomeIcon className={styles.icon} icon={faShoppingBasket} />
               </div>
-              {cart.length > 0 && (
-                  <div className={styles.cartCounter}>{cart.length}</div>
-                )}
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
+              {cart.length > 0 && <div className={styles.cartCounter}>{cart.length}</div>}
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
