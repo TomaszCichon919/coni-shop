@@ -1,15 +1,26 @@
 @import './settings.scss';
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+
 
 body {
+  width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+
 //   background: $color-dark;
 //   font-family: $font-text;
 //   font-size: ($base-size * 1.1);
 //   color: $color-light;
   letter-spacing: 0.5px;
 }
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+    text-align: center;
+  }

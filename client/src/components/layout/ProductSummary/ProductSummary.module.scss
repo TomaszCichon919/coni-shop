@@ -5,22 +5,22 @@
   border-radius: 30px;
 }
 
-.img-row {
+.img_row {
   height: 250px;
 }
 
 
-.product-img {
+.product_img {
   border-radius: 5%;
   width: 100%;
   height: 100%;
   position: absolute;
   object-fit: cover;
-  overflow: hidden;
   z-index: -1;
 }
-.name-container {
+.name_container {
   text-align: center;
+  padding-top: 10px;
 }
 
 .overlay {
@@ -41,6 +41,10 @@
   border-radius: 30px;
 }
 
+.overlay a {
+  text-decoration: none;
+}
+
 .wrapper:hover .overlay {
   opacity: 1;
 }
@@ -58,19 +62,19 @@
 }
 
 .name {
-  margin-top: auto; /* Align name and price to bottom */
+  margin-top: auto; 
 }
 
 .price {
-  margin-bottom: 10px; /* Add spacing between name and price */
+  margin-bottom: 10px; 
 }
-.large-img {
-  transform: scale(1); 
+.large_img {
+  transform: scale(0.8); 
   bottom: 40px; 
 }
-.small-img {
+.small_img {
   bottom: 70px;
-  transform: scale(1.5);
+  transform: scale(1.4);
 }
 
 .sectionDivider { 

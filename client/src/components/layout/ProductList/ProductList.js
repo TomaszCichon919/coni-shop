@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductSummary from '../ProductSummary/ProductSummary';
-import './ProductList.scss';
-import { Row, Col, Form, Alert } from 'react-bootstrap'; // Import Alert component
+import styles from './ProductList.module.scss';
+import { Row, Col, Form, Alert } from 'react-bootstrap'; 
 import Button from '../Button/Button';
 
 const ProductList = ({ products }) => {
@@ -59,27 +59,28 @@ const ProductList = ({ products }) => {
   };
 
   return (
-    <>
-      <Row className="product-list">
+    <div className='px-5'>
+      <Row>
+      <h2 className={styles.section_name}>List of Products</h2>
         <Col xs={12}>
-          <h2>Products</h2>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="search">
-              <Form.Control
-                type="text"
-                name="search"
-                placeholder="Search by product name"
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-              />
-            </Form.Group>
-            <Button type="submit">Search</Button>
-          </Form>
+  <Form.Group controlId="search">
+    <Form.Control
+      className={`${styles.input} mr-2`} 
+      type="text"
+      name="search"
+      placeholder="Search by product name"
+      value={searchTerm}
+      onChange={e => setSearchTerm(e.target.value)}
+    />
+  </Form.Group>
+  <Button className={`${styles['search-button']} btn-primary`} type="submit">Search</Button> {/* Add styles for button */}
+</Form>
         </Col>
-        <hr className="sectionDivider" />
+        <hr className={styles.sectionDivider} />
         {filteredProducts.length === 0 && !showAllProducts ? (
           <Col xs={12}>
-            <Alert variant="warning">No products found</Alert> {/* Use Bootstrap's Alert component */}
+            <Alert variant="warning">No products found</Alert> 
           </Col>
         ) : (
           currentProducts.map(product => (
@@ -89,12 +90,12 @@ const ProductList = ({ products }) => {
           ))
         )}
       </Row>
-      <hr className="sectionDivider" />
-      <div className="pagination">
+      <hr className={styles.sectionDivider} />
+      <div className={styles.pagination}>
         {currentPage > 1 && <Button onClick={prevPage}>Previous Page</Button>}
         {currentPage < totalPages && <Button onClick={nextPage}>Next Page</Button>}
       </div>
-    </>
+    </div>
   );
 };
 

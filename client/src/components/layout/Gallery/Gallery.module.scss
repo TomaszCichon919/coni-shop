@@ -1,14 +1,14 @@
 @import "../../../styles/settings.scss";
 
 .root {
-    padding: 5rem 0;
+    padding: 20px 0;
     margin-top: 10px;
     
     .slider {
       display: flex;
 
       flex-wrap: nowrap;
-      overflow: hidden; /* Zapobiega pojawianiu się poziomego przewijania */
+      overflow: hidden; 
     }
 
   

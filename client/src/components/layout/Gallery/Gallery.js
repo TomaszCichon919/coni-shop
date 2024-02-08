@@ -75,8 +75,8 @@ const Gallery = ({productName}) => {
 
   return (
     <div className={styles.root}>
-        <h2>Other product you might be interested in</h2>
-      <div className='container'>
+        <h2 className='py-4'>Other product you might be interested in</h2>
+      <div>
         <hr className={styles.sectionDivider} />
         <div className={styles.slider}>
           <button className={styles.sliderButton} onClick={handlePrevSlideChange}>

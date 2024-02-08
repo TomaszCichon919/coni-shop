@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './ProductSummary.scss';
+import styles from'./ProductSummary.module.scss';
 import Button from '../Button/Button'; 
 import clsx from 'clsx';
 
@@ -10,24 +10,25 @@ const ProductSummary = ({ name, img, price, id }) => {
   const isSmallProduct = name.includes('Wild');
 
   return (
-    <Col key={id} className='wrapper'>
-      <Row className='img-row'>
+    <Col key={id} className={styles.wrapper}>
+      <Row className={styles.img_row}>
         <Col className='sm-12 p-0'>
           <div>
-            <img className={clsx('product-img', { 'small-img': isSmallProduct, 'large-img': isLargeProduct })} src={img} alt={id} />
+          <img className={clsx(styles['product_img'], 
+          { [styles['small_img']]: isSmallProduct, [styles['large_img']]: isLargeProduct })} src={img} alt={id} />
           </div>
-          <div className='overlay'>
+          <div className={styles.overlay}>
             <Link to={'/product/' + id}>
               <Button>Read More</Button>
             </Link>
           </div>
         </Col>
       </Row>
-      <Row className='details'>
+      <Row className={styles.details}>
         <Col>
-          <div className='name-container pt-5'>
-            <h3 className='name'>{name}</h3>
-            <p className='price'>Price: {price}</p>
+          <div className={styles.name_container}>
+            <h4 className={styles.name}>{name}</h4>
+            <p className={styles.price}>Price: {price} $</p>
           </div>
         </Col>
       </Row>

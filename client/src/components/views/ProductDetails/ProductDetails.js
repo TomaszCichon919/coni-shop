@@ -1,16 +1,18 @@
-import React, { useState, useEffect} from 'react';
-import { useParams, Link, Navigate} from 'react-router-dom';
-import { Container, Col, Row, Button, Form, Alert } from 'react-bootstrap';
-import { useDispatch, useSelector} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, Navigate } from 'react-router-dom';
+import { Col, Row, Form, Alert } from 'react-bootstrap';
+import { Button as BootstrapButton } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../../redux/cartRedux';
 import { getAllProducts } from '../../../redux/productRedux';
 import { memoizedGetAll } from '../../../redux/cartRedux';
+import Button from '../../layout/Button/Button'
 import Gallery from '../../layout/Gallery/Gallery'
-import './ProductDetails.scss';
+import styles from './ProductDetails.module.scss';
 import clsx from 'clsx';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaw} from '@fortawesome/free-solid-svg-icons';
+import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetails = () => {
   const memoizedcartItems = useSelector(memoizedGetAll);
@@ -55,13 +57,13 @@ const ProductDetails = () => {
       timer = setTimeout(() => {
         setShowAlert(false);
         setShowErrorAlert(false);
-      }, 3000); // Hide alert after 3 seconds
+      }, 3000);
     }
     return () => clearTimeout(timer);
   }, [showAlert, showErrorAlert]);
 
 
-  if(!product) return <Navigate to="/" />
+  if (!product) return <Navigate to="/" />
 
   const isLargeProduct = product.name.includes('jar');
   const isSmallProduct = product.name.includes('Wild');
@@ -69,9 +71,9 @@ const ProductDetails = () => {
   const descriptionSentences = product.description.split('. ');
 
   return (
-    <Container>
-      <h2>Product details</h2>
-      <hr className="sectionDivider" />
+    <div className='px-5'>
+      <h2 className='py-4'>Product details</h2>
+      <hr className={styles.sectionDivider} />
       {showAlert && (
         <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
           Product added to cart!
@@ -82,29 +84,33 @@ const ProductDetails = () => {
           Product already added to cart! Quantity can be altered in Cart.
         </Alert>
       )}
-      <Col key={product.id} className="details-wrapper">
+      <Col key={product.id} className={styles.details_wrapper_d}>
         <Row>
-          <Col xs={12} sm={6} className="img_container_d">
-            <img className={clsx('product_img_d', { 'small_img_d': isSmallProduct, 'large_img_d': isLargeProduct })} src={product.img} alt={product.id} />
+          <Col xs={12} sm={6} className={styles.img_container_d}>
+            <img
+              className={clsx(styles.product_img_d, {
+                [styles.small_img_d]: isSmallProduct,
+                [styles.large_img_d]: isLargeProduct
+              })}
+              src={product.img}
+              alt={product.id}
+            />
           </Col>
-          <Col xs={12} sm={6} className="description_container">
-          <h3 className="pt-2 px-2">{product.name}</h3>
-            <p>
-              <span className="caption">Price</span>
-              {product.price}$
-            </p>
-              <span className="caption">Description</span>
-              <ul className="description-list">
-                {descriptionSentences.map((sentence, index) => (
-                  <li key={index}>
-                    <FontAwesomeIcon icon={faPaw} className="description-icon" />
-                    {sentence}
-                  </li>
-                ))}
-              </ul>
-            <div className="quantity-controls">
-              <Form.Group className="mb-3 d-flex align-items-center">
-                <Button variant="outline-secondary" onClick={() => handleQuantityChange(quantity - 1)}>-</Button>
+          <Col xs={12} sm={6} className={styles.description_container}>
+            <h3 className="pt-2 px-2">{product.name}</h3>
+              <p className={styles.caption_price}>Price {product.price} $/pcs</p>
+            <p className={styles.caption}>Description</p>
+            <ul className={styles.description_list}>
+              {descriptionSentences.map((sentence, index) => (
+                <li key={index}>
+                  <FontAwesomeIcon icon={faPaw} className={styles.description_icon} />
+                  {sentence}
+                </li>
+              ))}
+            </ul>
+            <div className={styles.quantity_controls}>
+              <Form.Group className="my-5 d-flex align-items-center">
+                <BootstrapButton variant="outline-secondary" onClick={() => handleQuantityChange(quantity - 1)}>-</BootstrapButton>
                 <Form.Control
                   type="number"
                   value={quantity}
@@ -113,28 +119,25 @@ const ProductDetails = () => {
                   max="999"
                   style={{ width: '80px', margin: '0 10px' }}
                 />
-                <Button variant="outline-secondary" onClick={() => handleQuantityChange(quantity + 1)}>+</Button>
+                <BootstrapButton variant="outline-secondary" onClick={() => handleQuantityChange(quantity + 1)}>+</BootstrapButton>
               </Form.Group>
             </div>
             <Button
-              className="my-2 mx-3 px-5"
-              variant="success"
+              className={styles.custom}
               onClick={handleAddToCart}
             >
               Add to Cart
             </Button>
             <Link to="/cart">
               <Button
-                className="my-2 mx-3 px-5"
-                variant="dark"
+                className={styles.add_to_cart}
               >
                 Go to Cart
               </Button>
             </Link>
             <Link to="/">
               <Button
-                className="my-2 mx-3 px-5 te"
-                variant="dark"
+                className={styles.custom}
               >
                 Back to shopping
               </Button>
@@ -142,8 +145,8 @@ const ProductDetails = () => {
           </Col>
         </Row>
       </Col>
-      <Gallery productName={product.name}/>
-    </Container>
+      <Gallery productName={product.name} />
+    </div>
   );
 
 };

@@ -3,73 +3,63 @@
 .root {
   background-color: $header-bg;
 
-    height: 130px;
-  
 
   .logo {
     border-radius: 10px;
-  
+    margin-right: 20px;
   }
-  
-  
+
   .phoneNumber {
     span {
       margin-left: 10px;
       font-size: 17px;
       line-height: 42px;
-      color:  $primary;
+      color: $color-light;
       font-weight: 500;
     }
   }
-      .icon {
-        font-size: 32px;
-        color: $primary;
-        vertical-align: middle;
-        margin-top: -3px;
-        
-      }
-    
 
+  .icon {
+    font-size: 32px;
+    color: $color-light;
+    vertical-align: middle;
+    margin-top: -3px;
+  }
 
   .cart {
-    display: flex;
-    justify-content: flex-end;
+
 
     .cartBox {
-      display: inline-block;
-      position: relative;
-      color: #ffffff;
-      
+    
+      color: $color-light;
 
       .cartIcon {
-       
         height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         font-size: 20px;
+        position: relative;
+        align-items: center;
 
         .icon {
-          margin-right: 10px
+          margin-right: 10px;
+          position: absolute;
+          top:10px;
         }
-      }
-
-      .cartCounter {
-        margin: 0;
-        width: 17px;
-        height: 17px;
-        border-radius: 20px;
-        background-color: red;
-        display: flex;
-        align-items: center;
-        justify-content:center;
-        font-size: 10px;
-        font-weight: bold;
-        color: rgb(224, 227, 237);
-        position: absolute;
-        top: 28%;
-        right: -40px;
-        transform: translate(50%, -50%);
+        .cartCounter {
+          margin: 0;
+          width: 17px;
+          height: 17px;
+          border-radius: 20px;
+          background-color: red;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          font-weight: bold;
+          color: rgb(224, 227, 237);
+          position: absolute;
+          left: 30px;
+          bottom: 35px;
+        }
       }
 
       &:hover {
@@ -82,6 +72,23 @@
       }
     }
   }
+
+  .slogan {
+    display: inline-block; // Show the slogan on desktop
+    font-size: 30px;
+    font-weight: bold;
+    color: $color-light;
+    font-family: $decorative;
+  }
 }
 
+.navbar_collapse {
+  background-color: $header-bg; /* Set the same background color as the entire Navbar */
+}
 
+@media (min-width: 750px) {
+  .slogan {
+    display: none;
+  }
+
+}

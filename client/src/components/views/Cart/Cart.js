@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Form, Container, Row, Col } from 'react-bootstrap';
-import { memoizedGetAll, updateCartProductQuantity, removeAllCartProducts, updateCartProductComment } from '../../../redux/cartRedux';
-import './Cart.scss';
-
+import { Form, Row, Col } from 'react-bootstrap';
+import { memoizedGetAll, updateCartProductQuantity, removeAllCartProducts, updateCartProductComment, removeFromCart } from '../../../redux/cartRedux';
+import styles from './Cart.module.scss';
+import Button from '../../layout/Button/Button';
+import { Button as BootstrapButton } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import clsx from 'clsx';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartProducts = useSelector(memoizedGetAll);
   const [comments, setComments] = useState({});
-  const [comment, setComment] = useState('');
 
   const handleQuantityChange = (productId, newQuantity, productPrice) => {
     newQuantity = parseInt(newQuantity);
@@ -29,61 +32,74 @@ const Cart = () => {
   };
 
   const handleAddComment = (productId) => {
-    setComments({
-      ...comments,
-      [productId]: comment
-    });
     dispatch(updateCartProductComment(productId, comments[productId]));
-    setComment('');
   };
+
+  const handleRemoveProduct = (productId) => {
+    dispatch(removeFromCart(productId));
+  };
+
 
   const handleClearCart = () => {
     dispatch(removeAllCartProducts());
     navigate('/');
   };
+
   
 
   return (
-    <Container>
-      <h2>Shopping Cart</h2>
+    <div className='px-5'>
+      <h2 className='py-4'>Shopping Cart</h2>
+      <hr className={styles.sectionDivider} />
       {cartProducts.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
         <div>
           {cartProducts.map((cartItem) => (
-            <Row key={cartItem.id}>
-              <Col xs={12} sm={6} className='cart_img_wrapper'>
-                <img className='cart_product_img' src={cartItem.img} alt={cartItem.name} />
+            <Row key={cartItem.id} className={styles.cartItem}>
+              <Col xs={12} sm={6} className={styles.cartImageWrapper}>
+                <img className={clsx(styles.cartProductImg, {
+                   [styles.small_img]: cartItem.name.includes('Wild'),
+                   [styles.large_img]: cartItem.name.includes('jar'),
+                })} src={cartItem.img} alt={cartItem.name} />
               </Col>
               <Col xs={12} sm={6}>
-                <div>
-                  <p>{cartItem.name}</p>
-                  <p>Price: ${cartItem.totalPrice}</p>
-                  <div className="quantity-controls d-flex align-items-center">
-                    <Button
+              <div className="d-flex align-items-center justify-content-between"> 
+              <h3 className="pt-2">{cartItem.name}</h3>
+              <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  className={styles.removeIcon}
+                  onClick={() => handleRemoveProduct(cartItem.id)}
+                />
+                </div>
+                <p className={styles.caption_price}>Price: {cartItem.totalPrice} $</p>
+                <div className={styles.quantityControls}>
+                  <Form.Group className="my-4 d-flex align-items-center">
+                    <BootstrapButton
                       variant="outline-secondary"
                       onClick={() => handleQuantityChange(cartItem.id, cartItem.quantity - 1, cartItem.totalPrice)}
                     >
                       -
-                    </Button>
+                    </BootstrapButton>
                     <Form.Control
                       type="number"
                       value={cartItem.quantity}
                       onChange={(e) => handleQuantityChange(cartItem.id, e.target.value, cartItem.totalPrice)}
                       min="1"
-                      className="form-control mb-2 mx-2"
+                      max="999"
+                      style={{ width: '80px', margin: '0 10px' }}
+
                     />
-                    <Button
+                    <BootstrapButton
                       variant="outline-secondary"
                       onClick={() => handleQuantityChange(cartItem.id, cartItem.quantity + 1, cartItem.totalPrice)}
-                      className="mb-2 mx-2"
                     >
                       +
-                    </Button>
-                  </div>
+                    </BootstrapButton>
+                  </Form.Group>
                 </div>
-                <Form.Group controlId={`comment-${cartItem.id}`} className="mb-2">
-                  <Form.Control
+                <Form.Group controlId={`comment-${cartItem.id}`} className="mb-3 d-flex align-items-start align-items-center">
+                  <Form.Control className={styles.comment_field}
                     as="textarea"
                     rows={3}
                     placeholder="Add Comment"
@@ -93,42 +109,22 @@ const Cart = () => {
                       [cartItem.id]: e.target.value
                     })}
                   />
+                    <Button onClick={() => handleAddComment(cartItem.id)}>Add comment</Button>
                 </Form.Group>
-                <Button
-                  variant="primary"
-                  onClick={() => handleAddComment(cartItem.id)}
-                >
-                  Add comment
-                </Button>
               </Col>
             </Row>
           ))}
         </div>
       )}
       <Link to="/">
-        <Button
-          className='my-2 mx-3 px-5'
-          variant='primary'
-        >
-          Back to shopping
-        </Button>
+        <Button className='my-2 mx-3 px-5'>Back to shopping</Button>
       </Link>
       <Link to="/order">
-        <Button
-          className='my-2 mx-3 px-5'
-          variant='primary'
-        >
-          Order summary
-        </Button>
+        <Button className='my-2 mx-3 px-5'>Order summary</Button>
       </Link>
-      <Button
-          className='my-2 mx-3 px-5'
-          variant='primary'
-          onClick={handleClearCart}
-        >
-          Clear Cart
-        </Button>
-    </Container>
+      <Button className='my-2 mx-3 px-5'  onClick={handleClearCart}>Clear Cart</Button>
+    </div>
   );
 };
+
 export default Cart;
