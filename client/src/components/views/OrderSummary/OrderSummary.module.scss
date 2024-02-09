@@ -1,3 +1,22 @@
+@import "../../../styles/settings.scss";
+
+.section_name {
+font-family: $font-text;
+  padding-top: 20px;
+  padding-bottom: 10px; 
+}
+
+.summary {
+    font-size: 20px;
+    font-weight: 500;
+    display: block;
+}
+
 input[type='number'].no_center {
     text-align: left; 
+  }
+
+  .button_custom {
+    background: $header-bg !important;
+    font-size: 400px;
   }

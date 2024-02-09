@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Protest+Riot&family=Roboto&display=swap');
 
 //fonts
-$decorative: 'Patrick Hand', cursive;
+$decorative: 'Patrick Hand',  sans-serif, cursive;
 
 
 $base-padding: 24px;
@@ -20,7 +19,7 @@ $color-light: #ffff;
 $color-dark: #2f3542;
 
 
-$font-text: 'Poppins', sans-serif;
+$font-text: 'PRotest Riot', sans-serif;
 
 $radius: 5px;
 $base-size: 12px;

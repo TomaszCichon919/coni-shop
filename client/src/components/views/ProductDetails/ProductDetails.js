@@ -72,7 +72,7 @@ const ProductDetails = () => {
 
   return (
     <div className='px-5'>
-      <h2 className='py-4'>Product details</h2>
+      <h2 className={styles.section_name}>Product details</h2>
       <hr className={styles.sectionDivider} />
       {showAlert && (
         <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
@@ -96,7 +96,7 @@ const ProductDetails = () => {
               alt={product.id}
             />
           </Col>
-          <Col xs={12} sm={6} className={styles.description_container}>
+          <Col xs={12} sm={6}>
             <h3 className="pt-2 px-2">{product.name}</h3>
               <p className={styles.caption_price}>Price {product.price} $/pcs</p>
             <p className={styles.caption}>Description</p>
@@ -123,15 +123,13 @@ const ProductDetails = () => {
               </Form.Group>
             </div>
             <Button
-              className={styles.custom}
+              special
               onClick={handleAddToCart}
             >
               Add to Cart
             </Button>
             <Link to="/cart">
-              <Button
-                className={styles.add_to_cart}
-              >
+              <Button>
                 Go to Cart
               </Button>
             </Link>

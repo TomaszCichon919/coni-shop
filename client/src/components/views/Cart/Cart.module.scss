@@ -1,6 +1,10 @@
 @import "../../../styles/settings.scss";
 
-
+.section_name {
+font-family: $font-text;
+  padding-top: 20px;
+  padding-bottom: 10px; 
+}
 
 .cartImageWrapper {
     position: relative;

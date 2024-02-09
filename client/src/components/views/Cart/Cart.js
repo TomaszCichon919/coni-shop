@@ -45,11 +45,11 @@ const Cart = () => {
     navigate('/');
   };
 
-  
+
 
   return (
     <div className='px-5'>
-      <h2 className='py-4'>Shopping Cart</h2>
+      <h2 className={styles.section_name}>Shopping Cart</h2>
       <hr className={styles.sectionDivider} />
       {cartProducts.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -59,18 +59,18 @@ const Cart = () => {
             <Row key={cartItem.id} className={styles.cartItem}>
               <Col xs={12} sm={6} className={styles.cartImageWrapper}>
                 <img className={clsx(styles.cartProductImg, {
-                   [styles.small_img]: cartItem.name.includes('Wild'),
-                   [styles.large_img]: cartItem.name.includes('jar'),
+                  [styles.small_img]: cartItem.name.includes('Wild'),
+                  [styles.large_img]: cartItem.name.includes('jar'),
                 })} src={cartItem.img} alt={cartItem.name} />
               </Col>
               <Col xs={12} sm={6}>
-              <div className="d-flex align-items-center justify-content-between"> 
-              <h3 className="pt-2">{cartItem.name}</h3>
-              <FontAwesomeIcon
-                  icon={faCircleXmark}
-                  className={styles.removeIcon}
-                  onClick={() => handleRemoveProduct(cartItem.id)}
-                />
+                <div className="d-flex align-items-center justify-content-between">
+                  <h3 className="pt-2">{cartItem.name}</h3>
+                  <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    className={styles.removeIcon}
+                    onClick={() => handleRemoveProduct(cartItem.id)}
+                  />
                 </div>
                 <p className={styles.caption_price}>Price: {cartItem.totalPrice} $</p>
                 <div className={styles.quantityControls}>
@@ -109,20 +109,20 @@ const Cart = () => {
                       [cartItem.id]: e.target.value
                     })}
                   />
-                    <Button onClick={() => handleAddComment(cartItem.id)}>Add comment</Button>
+                  <Button onClick={() => handleAddComment(cartItem.id)}>Add comment</Button>
                 </Form.Group>
               </Col>
             </Row>
           ))}
         </div>
       )}
+      <Link to="/order">
+        <Button special className='my-2 mx-3 px-5'>Order summary</Button>
+      </Link>
       <Link to="/">
         <Button className='my-2 mx-3 px-5'>Back to shopping</Button>
       </Link>
-      <Link to="/order">
-        <Button className='my-2 mx-3 px-5'>Order summary</Button>
-      </Link>
-      <Button className='my-2 mx-3 px-5'  onClick={handleClearCart}>Clear Cart</Button>
+      <Button className='my-2 mx-3 px-5' onClick={handleClearCart}>Clear Cart</Button>
     </div>
   );
 };

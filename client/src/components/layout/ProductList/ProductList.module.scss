@@ -1,7 +1,7 @@
 @import "../../../styles/settings.scss";
 
 .section_name {
-  text-align: center;
+font-family: $font-text;
   padding-top: 20px;
   padding-bottom: 10px; 
 }
@@ -22,7 +22,8 @@
 
   .input {
     height: 90%;
-    width: 80%; 
+    width: 40%; 
+    margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 20px; 
   }

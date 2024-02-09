@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductSummary from '../ProductSummary/ProductSummary';
 import styles from './ProductList.module.scss';
-import { Row, Col, Form, Alert } from 'react-bootstrap'; 
+import { Row, Col, Form, Alert } from 'react-bootstrap';
 import Button from '../Button/Button';
 
 const ProductList = ({ products }) => {
@@ -61,26 +61,26 @@ const ProductList = ({ products }) => {
   return (
     <div className='px-5'>
       <Row>
-      <h2 className={styles.section_name}>List of Products</h2>
         <Col xs={12}>
-          <Form onSubmit={handleSubmit}>
-  <Form.Group controlId="search">
-    <Form.Control
-      className={`${styles.input} mr-2`} 
-      type="text"
-      name="search"
-      placeholder="Search by product name"
-      value={searchTerm}
-      onChange={e => setSearchTerm(e.target.value)}
-    />
-  </Form.Group>
-  <Button className={`${styles['search-button']} btn-primary`} type="submit">Search</Button> {/* Add styles for button */}
-</Form>
+          <Form className='d-flex align-items-center justify-content-center' onSubmit={handleSubmit}>
+            <Form.Group controlId="search">
+              <Form.Control
+                className={styles.input}
+                type="text"
+                name="search"
+                placeholder="Search by product name"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+              />
+            </Form.Group>
+            <Button type="submit">Search</Button>
+          </Form>
         </Col>
+        <h2 className={styles.section_name}>Product List</h2>
         <hr className={styles.sectionDivider} />
         {filteredProducts.length === 0 && !showAllProducts ? (
           <Col xs={12}>
-            <Alert variant="warning">No products found</Alert> 
+            <Alert variant="warning">No products found</Alert>
           </Col>
         ) : (
           currentProducts.map(product => (

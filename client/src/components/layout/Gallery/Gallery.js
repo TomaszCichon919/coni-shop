@@ -75,7 +75,7 @@ const Gallery = ({productName}) => {
 
   return (
     <div className={styles.root}>
-        <h2 className='py-4'>Other product you might be interested in</h2>
+        <h2 className={styles.section_name}>Other product you might be interested in</h2>
       <div>
         <hr className={styles.sectionDivider} />
         <div className={styles.slider}>
