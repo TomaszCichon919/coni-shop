@@ -17,7 +17,7 @@ const Gallery = ({productName}) => {
     } else if (productName.includes('Wild')) {
       return product.name.toLowerCase().includes('wild');
     } else {
-      return false; // Return false if productName doesn't include 'Jar' or 'Wild'
+      return false;
     }
   });
   const filteredProductsCount = filteredProducts.length;
@@ -67,7 +67,7 @@ const Gallery = ({productName}) => {
     };
 
     calculateEndPoint();
-  }, [startPoint, filteredProductsCount, products, slidesPerPage]);
+  }, [startPoint, filteredProductsCount, filteredProducts, products, slidesPerPage]);
 
   useEffect(() => {
     const handleWindowResize = () => {

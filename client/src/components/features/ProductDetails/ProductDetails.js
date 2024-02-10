@@ -10,7 +10,6 @@ import Button from '../../layout/Button/Button'
 import Gallery from '../../features/Gallery/Gallery'
 import styles from './ProductDetails.module.scss';
 import clsx from 'clsx';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 

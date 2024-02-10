@@ -1,5 +1,5 @@
 
-// import { API_URL } from '../config';
+import { API_URL } from '../config';
 
 /* SELECTORS */
 export const getAllOrders = ({ orders }) => orders;
@@ -25,7 +25,8 @@ export const loadOrders = (orders) => ({
 export const addOrder = (order) => {
     return async (dispatch) => {
       try {
-        const response = await fetch(`http://localhost:8000/api/orders`, {
+        const response = await fetch(`${API_URL}/api/orders`, {
+        // const response = await fetch(`http://localhost:8000/api/orders`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

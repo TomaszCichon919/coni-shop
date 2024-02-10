@@ -11,8 +11,8 @@ const ProductSection = () => {
   useEffect(() => {
     dispatch(loadProductsRequest());
   }, [dispatch]);
+  
   const products = useSelector(getAllProducts);
-  console.log('products', products)
   if (products === undefined || !products.length) {
     return <Alert color="info">Loading...</Alert>;
   } else if (products.length === 0) {

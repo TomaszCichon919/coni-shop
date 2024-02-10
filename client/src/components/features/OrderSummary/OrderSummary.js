@@ -29,7 +29,6 @@ const OrderSummary = () => {
   const totalQuantity = cartProducts.reduce((acc, product) => acc + product.quantity, 0);
 
   const handleSubmit = () => {
-    console.log('click');
     const orderItems = cartProducts.map(product => ({
       id: product.id,
       quantity: product.quantity,
@@ -47,7 +46,7 @@ const OrderSummary = () => {
       deliveryDetails: content,
       orderItems,
     };
-    console.log('order', order);
+    
     dispatch(addOrder(order));
 
     dispatch(removeAllCartProducts());
