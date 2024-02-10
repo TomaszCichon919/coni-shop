@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-import ProductSection from '../../layout/ProductSection/ProductSection';
+import ProductSection from '../../features/ProductSection/ProductSection';
 import ClientCarousel from '../../layout/ClientCarousel/ClientCarousel';
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from './ProductSummary.module.scss';
-import Button from '../Button/Button';
+import Button from '../../layout/Button/Button';
 import clsx from 'clsx';
 
 const ProductSummary = ({ name, img, price, id }) => {

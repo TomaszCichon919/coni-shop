@@ -3,11 +3,11 @@ import { Routes, Route, } from 'react-router-dom';
 
 
 import Container from './components/layout/Container/Container';
-import Homepage from './components/views/Homepage/Hompage';
-import ProductDetails from './components/views/ProductDetails/ProductDetails';
-import Cart from './components/views/Cart/Cart';
-import OrderSummary from './components/views/OrderSummary/OrderSummary';
-import NotFound from './components/views/NotFound/NotFound';
+import Homepage from './components/layout/Homepage/Hompage';
+import ProductDetails from './components/features/ProductDetails/ProductDetails';
+import Cart from './components/features/Cart/Cart';
+import OrderSummary from './components/features/OrderSummary/OrderSummary';
+import NotFound from './components/layout/NotFound/NotFound';
 
 
 const App = () => (

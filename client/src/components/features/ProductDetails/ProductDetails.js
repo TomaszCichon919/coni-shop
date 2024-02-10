@@ -7,7 +7,7 @@ import { addToCart } from '../../../redux/cartRedux';
 import { getAllProducts } from '../../../redux/productRedux';
 import { memoizedGetAll } from '../../../redux/cartRedux';
 import Button from '../../layout/Button/Button'
-import Gallery from '../../layout/Gallery/Gallery'
+import Gallery from '../../features/Gallery/Gallery'
 import styles from './ProductDetails.module.scss';
 import clsx from 'clsx';
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductSummary from '../ProductSummary/ProductSummary';
 import styles from './ProductList.module.scss';
 import { Row, Col, Form, Alert } from 'react-bootstrap';
-import Button from '../Button/Button';
+import Button from '../../layout/Button/Button';
 
 const ProductList = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
