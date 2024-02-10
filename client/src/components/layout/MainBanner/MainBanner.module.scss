@@ -74,7 +74,7 @@
   }
 
   .slogan {
-    display: inline-block; // Show the slogan on desktop
+    display: inline-block;
     font-size: 30px;
     font-weight: bold;
     color: $color-light;
@@ -83,12 +83,6 @@
 }
 
 .navbar_collapse {
-  background-color: $header-bg; /* Set the same background color as the entire Navbar */
+  background-color: $header-bg;
 }
 
-@media (min-width: 750px) {
-  .slogan {
-    display: none;
-  }
-
-}

@@ -9,12 +9,12 @@ import ClientCarousel from '../../layout/ClientCarousel/ClientCarousel';
 
 const Homepage = () => {
 
- return (
-  <div>
-    <ClientCarousel />
-    <ProductSection />
+  return (
+    <div>
+      <ClientCarousel />
+      <ProductSection />
     </div>
-);
+  );
 }
 
 

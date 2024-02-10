@@ -1,4 +1,4 @@
-// import { v4 as uuidv4 } from 'uuid';
+
 // import { API_URL } from '../config';
 
 /* SELECTORS */
@@ -20,13 +20,6 @@ export const loadOrders = (orders) => ({
   payload: orders,
 });
 
-// export const addOrder = (order) => ({
-//   type: ADD_ORDER,
-//   payload: {
-//     id: uuidv4(), // Generate unique ID for the order
-//     order,
-//   },
-// });
 
 /* THUNKS */
 export const addOrder = (order) => {

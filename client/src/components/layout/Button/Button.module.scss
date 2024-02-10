@@ -1,39 +1,37 @@
-@import "../../../styles/settings.scss";
-
+@import '../../../styles/settings.scss';
 
 .button {
-    background: $color-dark;
-    border: 0;
-    color: $color-light;
-    text-align: center;
-    line-height: 1.3;
-    padding: $base-size;
-    margin: $base-size;
-    border-radius: $radius;
-    cursor: pointer;
-    font-weight: 400;
-    transition: $transition;
+  background: $color-dark;
+  border: 0;
+  color: $color-light;
+  text-align: center;
+  line-height: 1.3;
+  padding: $base-size;
+  margin: $base-size;
+  border-radius: $radius;
+  cursor: pointer;
+  font-weight: 400;
+  transition: $transition;
 
-    &:hover {
-        background: $header-bg;
-    }
-
+  &:hover {
+    background: $header-bg;
+  }
 }
 
 .specialButton {
-    background: $header-bg;
-    border: 0;
-    color: $color-light;
-    text-align: center;
-    line-height: 1.3;
-    padding: $base-size;
-    margin: $base-size;
-    border-radius: $radius;
-    cursor: pointer;
-    font-weight: 400;
-    transition: $transition;
+  background: $header-bg;
+  border: 0;
+  color: $color-light;
+  text-align: center;
+  line-height: 1.3;
+  padding: $base-size;
+  margin: $base-size;
+  border-radius: $radius;
+  cursor: pointer;
+  font-weight: 400;
+  transition: $transition;
 
-    &:hover {
-        background: $color-dark;
-    }
+  &:hover {
+    background: $color-dark;
+  }
 }

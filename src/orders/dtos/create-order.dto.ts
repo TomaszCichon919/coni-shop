@@ -15,7 +15,6 @@ class OrderItemDto {
   @IsString()
   comments: string;
 
-  // Other properties if needed
 }
 
 export class CreateOrderDto {

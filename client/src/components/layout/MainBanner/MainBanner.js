@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMobileAlt, faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
-import { Navbar, Nav, Container} from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import { memoizedGetAll } from '../../../redux/cartRedux';
 import styles from './MainBanner.module.scss';
 
 const MainBanner = () => {
   const cart = useSelector(memoizedGetAll);
+
+
 
   return (
     <Navbar expand="md" className={styles.root}>
@@ -21,10 +23,10 @@ const MainBanner = () => {
           <Nav className={styles.phoneNumber}>
             <Nav.Link>
               <FontAwesomeIcon className={styles.icon} icon={faMobileAlt} />
-              <span>+48 666 200 700</span> 
-              </Nav.Link>
+              <span>+48 666 200 700</span>
+            </Nav.Link>
           </Nav>
-          <Nav><p className={styles.slogan}>Shop online to get your products faster!</p></Nav>
+          <Nav><p className={`${styles.slogan} d-none d-md-block`}>Shop online to get your products faster!</p></Nav>
           <Nav className={styles.cart}>
             <Nav.Link as={Link} to="/cart" className={styles.cartBox}>
               <div className={styles.cartIcon}>
@@ -36,7 +38,7 @@ const MainBanner = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-      );
-    };
+  );
+};
 
 export default MainBanner;

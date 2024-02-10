@@ -65,7 +65,7 @@ const ProductDetails = () => {
 
   if (!product) return <Navigate to="/" />
 
-  const isLargeProduct = product.name.includes('jar');
+  const isLargeProduct = product.name.includes('Jar');
   const isSmallProduct = product.name.includes('Wild');
 
   const descriptionSentences = product.description.split('. ');
@@ -98,7 +98,7 @@ const ProductDetails = () => {
           </Col>
           <Col xs={12} sm={6}>
             <h3 className="pt-2 px-2">{product.name}</h3>
-              <p className={styles.caption_price}>Price {product.price} $/pcs</p>
+            <p className={styles.caption_price}>Price {product.price} $/pcs</p>
             <p className={styles.caption}>Description</p>
             <ul className={styles.description_list}>
               {descriptionSentences.map((sentence, index) => (

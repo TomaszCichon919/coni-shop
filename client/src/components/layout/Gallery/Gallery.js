@@ -1,6 +1,5 @@
 import styles from './Gallery.module.scss';
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { getAllProducts } from '../../../redux/productRedux';
 import ProductSummary from '../ProductSummary/ProductSummary';
@@ -11,11 +10,16 @@ const Gallery = ({productName}) => {
   const [productsToDisplay, setProductsToDisplay] = useState([]);
   const [slidesPerPage, setSlidesPerPage] = useState(0);
 
+
   const filteredProducts = products.filter(product => {
-    // Check if productName contains "jar" or "Wild"
-    return productName.includes('jar') || productName.includes('Wild');
+    if (productName.includes('Jar')) {
+      return product.name.toLowerCase().includes('jar');
+    } else if (productName.includes('Wild')) {
+      return product.name.toLowerCase().includes('wild');
+    } else {
+      return false; // Return false if productName doesn't include 'Jar' or 'Wild'
+    }
   });
- 
   const filteredProductsCount = filteredProducts.length;
 
   const calculateSlidesPerPage = () => {
@@ -49,17 +53,17 @@ const Gallery = ({productName}) => {
     const calculateEndPoint = () => {
       const endPoint = (startPoint + slidesPerPage) % filteredProductsCount;
 
-      let brandsToDisplay;
+      let productsToDisplay;
 
       if (startPoint <= endPoint) {
-        brandsToDisplay = products.slice(startPoint, endPoint);
+        productsToDisplay = filteredProducts.slice(startPoint, endPoint);
       } else {
-        const firstSlice = products.slice(startPoint);
-        const secondSlice = products.slice(0, endPoint);
-        brandsToDisplay = [...firstSlice, ...secondSlice];
+        const firstSlice = filteredProducts.slice(startPoint);
+        const secondSlice = filteredProducts.slice(0, endPoint);
+        productsToDisplay = [...firstSlice, ...secondSlice];
       }
 
-      setProductsToDisplay(brandsToDisplay);
+      setProductsToDisplay(productsToDisplay);
     };
 
     calculateEndPoint();
@@ -95,10 +99,5 @@ const Gallery = ({productName}) => {
   );
 };
 
-Gallery.propTypes = {
-  firstImg: PropTypes.number,
-  lastImg: PropTypes.number,
-  brands: PropTypes.array,
-};
 
 export default Gallery;

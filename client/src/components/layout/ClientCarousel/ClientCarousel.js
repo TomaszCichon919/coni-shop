@@ -33,7 +33,7 @@ const ClientCarousel = () => {
           <div key={index} className={styles.carousel_image_wrapper}>
             <img src={image} className={styles.carousel_image} alt={`Slide ${index}`} />
             <div className={styles.overlay}>
-            <p className={styles.carousel_text}>Meet some of our happy clients!</p>
+              <p className={styles.carousel_text}>Meet some of our happy clients!</p>
             </div>
           </div>
         ))}

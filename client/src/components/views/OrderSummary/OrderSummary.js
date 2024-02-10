@@ -109,20 +109,20 @@ const OrderSummary = () => {
         </Col>
       </Row>
       <Row>
-  <Col className="d-flex align-items-center">
-    <p className={styles.summary}>Total Order Cost: {totalCost} $</p>
-  </Col>
-  <Col className="d-flex align-items-center">
-    <p className={styles.summary}>Total Number of Products Ordered: {totalQuantity} pcs</p>
-  </Col>
-</Row>
+        <Col className="d-flex align-items-center">
+          <p className={styles.summary}>Total Order Cost: {totalCost} $</p>
+        </Col>
+        <Col className="d-flex align-items-center">
+          <p className={styles.summary}>Total Number of Products: {totalQuantity} pcs</p>
+        </Col>
+      </Row>
       <h1 className={styles.section_name}>Delivery information</h1>
       <hr className={styles.sectionDivider} />
       <Row className='mx-5'>
         <Col>
           <Form onSubmit={validate(handleSubmit)}>
             <Form.Group className="mb-3" controlId="formName">
-              <Form.Label>Customer Name</Form.Label>
+              <Form.Label>Name</Form.Label>
               <Form.Control {...register("name", { required: true })} type="text" value={name}
                 onChange={e => setName(e.target.value)} placeholder="Enter name" />
               {errors.name && <small className="d-block form-text text-danger mt-2">Field is requiered</small>}

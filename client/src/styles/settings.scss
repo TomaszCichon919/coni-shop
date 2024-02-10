@@ -2,38 +2,17 @@
 
 //fonts
 $decorative: 'Patrick Hand',  sans-serif, cursive;
-
-
-$base-padding: 24px;
+$font-text: 'PRotest Riot', sans-serif;
 
 
 //element colors
 $header-bg: #65B741;
-
-
-
-
-
-
 $color-light: #ffff;
 $color-dark: #2f3542;
 
 
-$font-text: 'PRotest Riot', sans-serif;
+//button styles
 
 $radius: 5px;
 $base-size: 12px;
-$transition: all 0.3s;
-
-// hover transition variables
 $transition: all 1s;
-
-
-%hover-transform {
-    background-position: 100% 0;
-    background-image: linear-gradient(90deg, #ffffff 50%, transparent 50%);
-    transition: $transition;
-    &:hover {
-        background-position: 0 100%;
-    }
-  }

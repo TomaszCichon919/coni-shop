@@ -1,42 +1,38 @@
-@import "../../../styles/settings.scss";
+@import '../../../styles/settings.scss';
 
 .section_name {
-font-family: $font-text;
+  font-family: $font-text;
   padding-top: 20px;
-  padding-bottom: 10px; 
+  padding-bottom: 10px;
 }
 
 .root {
-    padding: 20px 0;
-    margin-top: 10px;
-    
-    .slider {
-      display: flex;
+  padding: 20px 0;
+  margin-top: 10px;
 
-      flex-wrap: nowrap;
-      overflow: hidden; 
-    }
+  .slider {
+    display: flex;
 
-  
-    .sectionDivider { 
-      border: none;
-      border-top: 2px solid #2a2a2a;
-      margin: 10px 0;
-    }
-  
-    .sliderButton {
-      background-color: #2a2a2a;
-      color: #ffff;
-      flex: 0.2;
-      border: none;
-      margin: 10px;
-      border-radius: 30px;
-  
-      &:hover {
-        background-color: $header-bg;
-      }
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
+  .sectionDivider {
+    border: none;
+    border-top: 2px solid #2a2a2a;
+    margin: 10px 0;
+  }
+
+  .sliderButton {
+    background-color: #2a2a2a;
+    color: #ffff;
+    flex: 0.2;
+    border: none;
+    margin: 10px;
+    border-radius: 30px;
+
+    &:hover {
+      background-color: $header-bg;
     }
   }
-  
-
-  
+}

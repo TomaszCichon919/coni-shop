@@ -3,13 +3,13 @@ import clsx from 'clsx';
 import styles from './Button.module.scss';
 
 const Button = ({ className, onClick, children, special }) => {
-  // Conditionally construct classes based on props
+  
   const buttonClass = clsx(
-    styles.button, // Default class
+    styles.button,
     {
-      [styles.specialButton]: special, // Add specialButton class if specialProp is provided
+      [styles.specialButton]: special,
     },
-    className // Additional class provided as prop
+    className
   );
 
   return (

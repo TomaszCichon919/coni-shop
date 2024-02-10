@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Row, Col } from 'react-bootstrap';
-import { memoizedGetAll, updateCartProductQuantity, removeAllCartProducts, updateCartProductComment, removeFromCart } from '../../../redux/cartRedux';
+import { Form, Row, Col, Alert } from 'react-bootstrap';
+import {
+  memoizedGetAll, updateCartProductQuantity, removeAllCartProducts,
+  updateCartProductComment, removeFromCart
+} from '../../../redux/cartRedux';
 import styles from './Cart.module.scss';
 import Button from '../../layout/Button/Button';
 import { Button as BootstrapButton } from 'react-bootstrap';
@@ -10,11 +13,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 
+
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartProducts = useSelector(memoizedGetAll);
   const [comments, setComments] = useState({});
+  const [showCommentAddedAlert, setShowCommentAddedAlert] = useState({});
+
 
   const handleQuantityChange = (productId, newQuantity, productPrice) => {
     newQuantity = parseInt(newQuantity);
@@ -33,7 +39,11 @@ const Cart = () => {
 
   const handleAddComment = (productId) => {
     dispatch(updateCartProductComment(productId, comments[productId]));
+    setShowCommentAddedAlert({ ...showCommentAddedAlert, [productId]: true });
+    setTimeout(() => setShowCommentAddedAlert({ ...showCommentAddedAlert, [productId]: false }), 3000);
+    setComments({ ...comments, [productId]: '' });
   };
+
 
   const handleRemoveProduct = (productId) => {
     dispatch(removeFromCart(productId));
@@ -44,7 +54,6 @@ const Cart = () => {
     dispatch(removeAllCartProducts());
     navigate('/');
   };
-
 
 
   return (
@@ -60,7 +69,7 @@ const Cart = () => {
               <Col xs={12} sm={6} className={styles.cartImageWrapper}>
                 <img className={clsx(styles.cartProductImg, {
                   [styles.small_img]: cartItem.name.includes('Wild'),
-                  [styles.large_img]: cartItem.name.includes('jar'),
+                  [styles.large_img]: cartItem.name.includes('Jar'),
                 })} src={cartItem.img} alt={cartItem.name} />
               </Col>
               <Col xs={12} sm={6}>
@@ -111,18 +120,25 @@ const Cart = () => {
                   />
                   <Button onClick={() => handleAddComment(cartItem.id)}>Add comment</Button>
                 </Form.Group>
+                {showCommentAddedAlert[cartItem.id] && (
+                  <Alert variant="success" className="mt-2" onClose={() => setShowCommentAddedAlert(false)} dismissible>
+                    Comment added successfully!
+                  </Alert>
+                )}
               </Col>
             </Row>
           ))}
         </div>
       )}
-      <Link to="/order">
-        <Button special className='my-2 mx-3 px-5'>Order summary</Button>
-      </Link>
-      <Link to="/">
-        <Button className='my-2 mx-3 px-5'>Back to shopping</Button>
-      </Link>
-      <Button className='my-2 mx-3 px-5' onClick={handleClearCart}>Clear Cart</Button>
+      <div className="d-flex align-items-center justify-content-between">
+        <Link to="/order">
+          <Button special className='my-2 mx-3 px-5'>Order summary</Button>
+        </Link>
+        <Link to="/">
+          <Button className='my-2 mx-3 px-5'>Back to shopping</Button>
+        </Link>
+        <Button className='my-2 mx-3 px-5' onClick={handleClearCart}>Clear Cart</Button>
+      </div>
     </div>
   );
 };
