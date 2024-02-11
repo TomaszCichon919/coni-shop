@@ -9,6 +9,7 @@ const ProductList = ({ products }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showAllProducts, setShowAllProducts] = useState(true);
+ 
   const productsPerPage = 8;
 
   useEffect(() => {

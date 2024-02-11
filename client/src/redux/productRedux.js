@@ -28,7 +28,6 @@ export const loadProductsRequest = () => {
   return async dispatch => {
     try {
       const response = await fetch(`${API_URL}/api/products`);
-      // const response = await fetch('http://localhost:8000/api/products');
       if (response.ok) {
         const data = await response.json();
         dispatch(loadProducts(data)); 

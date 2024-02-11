@@ -20,16 +20,7 @@
 
 .specialButton {
   background: $header-bg;
-  border: 0;
-  color: $color-light;
-  text-align: center;
-  line-height: 1.3;
-  padding: $base-size;
-  margin: $base-size;
-  border-radius: $radius;
-  cursor: pointer;
-  font-weight: 400;
-  transition: $transition;
+ 
 
   &:hover {
     background: $color-dark;

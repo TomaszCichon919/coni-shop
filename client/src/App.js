@@ -1,7 +1,5 @@
 import React from 'react';
 import { Routes, Route, } from 'react-router-dom';
-
-
 import Container from './components/layout/Container/Container';
 import Homepage from './components/layout/Homepage/Hompage';
 import ProductDetails from './components/features/ProductDetails/ProductDetails';

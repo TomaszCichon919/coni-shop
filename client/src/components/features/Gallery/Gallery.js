@@ -1,3 +1,4 @@
+/* eslint-disable */
 import styles from './Gallery.module.scss';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -20,6 +21,7 @@ const Gallery = ({productName}) => {
       return false;
     }
   });
+  
   const filteredProductsCount = filteredProducts.length;
 
   const calculateSlidesPerPage = () => {
@@ -67,7 +69,7 @@ const Gallery = ({productName}) => {
     };
 
     calculateEndPoint();
-  }, [startPoint, filteredProductsCount, filteredProducts, products, slidesPerPage]);
+  }, [startPoint, filteredProductsCount, products, slidesPerPage]);
 
   useEffect(() => {
     const handleWindowResize = () => {

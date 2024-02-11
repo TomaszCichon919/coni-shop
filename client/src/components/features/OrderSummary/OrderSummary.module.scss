@@ -15,3 +15,14 @@ font-family: $font-text;
 input[type='number'].no_center {
     text-align: left; 
   }
+  .sectionDivider {
+    border: none;
+    border-top: 2px solid #2a2a2a;
+    margin-bottom: 20px;
+  }
+
+  .commentsColumn {
+    white-space: normal; 
+    word-wrap: break-word; 
+    width: 30%;
+  }

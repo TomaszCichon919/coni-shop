@@ -90,7 +90,7 @@ const OrderSummary = () => {
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>Comments</th>
+                <th className={styles.commentsColumn}>Comments</th>
               </tr>
             </thead>
             <tbody>
@@ -100,7 +100,7 @@ const OrderSummary = () => {
                   <td>{product.name}</td>
                   <td>{product.quantity}</td>
                   <td>{product.totalPrice} $</td>
-                  <td>{product.comments}</td>
+                  <td className={styles.commentsColumn}>{product.comments}</td>
                 </tr>
               ))}
             </tbody>
