@@ -16,13 +16,13 @@ const subreducers = {
 }
 
 const reducer = combineReducers(subreducers)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   reducer,
   initialState,
-  compose(
-		applyMiddleware(thunk),
-		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-	)
+  composeEnhancers(applyMiddleware(thunk))
+
 );
 
 export default store;
